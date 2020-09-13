@@ -46,3 +46,10 @@ Description of Data Set
 * This dataset has 8 variables defined including species, island, bill length (in mm), bill depth (in mm), flipper length (in mm), body mass (in g), sex, and year. This dataset has information from **`r min(pull(penguins, year))`** to **`r max(pull(penguins, year))`**. The different species of penguins in this dataset are **`r levels(pull(penguins, species))`** and the different islands in this dataset are **`r levels(pull(penguins, island))`**.
 * The dataset has **`r nrow(penguins)`** rows and **`r ncol(penguins)`** columns.
 * The mean flipper length is **`r mean(pull(penguins, flipper_length_mm))`**.
+
+Scatterplot
+
+``` {r, scatterplot_penguins, warning = FALSE}
+ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm, color = species)) + geom_point()
+ggsave
+```
