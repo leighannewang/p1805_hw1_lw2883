@@ -20,6 +20,26 @@ problem1_df = tibble(
 ```
 Finding the mean of each variable in data frame
 
-* The mean of norm_sample is **`r mean(pull(problem1_df, norm_sample))`**
-* The mean of norm_sample_pos is **`r mean(pull(problem1_df, norm_sample_pos))`**
+```{r, means_df}
+means_df = tibble(
+  mean(pull(problem1_df, norm_sample)),
+  mean(pull(problem1_df, norm_sample_pos))
+)
+```
 
+Applying as.numeric function to logical, character, and factor variables
+
+```{r, as.numeric_df}
+as.numeric_df = tibble(
+  as.numeric(pull(problem1_df, norm_sample_pos))
+)
+```
+
+# Problem 2
+
+Load the penguins dataset 
+
+```{r, penguins dataset, eval = FALSE}
+data("penguins", package = "palmerpenguins")
+summary(penguins)
+```
