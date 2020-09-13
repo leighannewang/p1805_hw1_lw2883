@@ -15,7 +15,11 @@ Creating a data frame with variables
 ```{r, problem1_df}
 problem1_df = tibble(
   norm_sample = rnorm(10),
-  norm_sample_pos = norm_sample > 0,
+  norm_sample_pos = norm_sample > 0
 )
-
 ```
+Finding the mean of each variable in data frame
+
+* The mean of norm_sample is **`r mean(pull(problem1_df, norm_sample))`**
+* The mean of norm_sample_pos is **`r mean(pull(problem1_df, norm_sample_pos))`**
+
