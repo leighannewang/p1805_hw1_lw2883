@@ -10,30 +10,39 @@ library(tidyverse)
 ```
 # Problem 1
 
-Creating a data frame with variables
+#### Creating a data frame with variables
 
 ```{r, problem1_df}
 problem1_df = tibble(
   norm_sample = rnorm(10),
-  norm_sample_pos = norm_sample > 0
+  norm_sample_pos = norm_sample > 0,
+  char_length_10 = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+  fact_length_10 = factor(c("low", "low", "low", "mod", "mod", "mod", "mod", "high", "high", "high")),
 )
 ```
-Finding the mean of each variable in data frame
+#### Finding the mean of each variable in the data frame
 
-```{r, problem1_df_means, collapse = TRUE}
+```{r, problem1_df_means, collapse = TRUE, warning = FALSE}
 mean(pull(problem1_df, norm_sample))
 mean(pull(problem1_df, norm_sample_pos))
+mean(pull(problem1_df, char_length_10))
+mean(pull(problem1_df, fact_length_10))
 ```
+After trying to take the means of each variable, I find that I am not able to take the mean of characters or factors. I am only able to take the mean of the number and logical variables.
 
-Applying as.numeric function to logical, character, and factor variables
+#### Applying *'as.numeric function'* to logical, character, and factor variables
 
-```{r, as.numeric, collapse = TRUE}
+```{r, as.numeric, collapse = TRUE, eval = FALSE}
 as.numeric(pull(problem1_df, norm_sample_pos))
+as.numeric(pull(problem1_df, char_length_10))
+as.numeric(pull(problem1_df, fact_length_10))
 ```
+When we apply the 'as.numeric' function, we are not able to apply it to the character variable, only the logical and factor variables. **explain why**
+
 
 # Problem 2
 
-Load the penguins dataset 
+#### Load the penguins dataset 
 
 ```{r, penguins_dataset, results = 'hide'}
 data("penguins", package = "palmerpenguins")
@@ -41,15 +50,24 @@ data("penguins", package = "palmerpenguins")
 summary(penguins)
 ```
 
-Description of Data Set
+#### Description of Data Set
 
-* This dataset has 8 variables defined including species, island, bill length (in mm), bill depth (in mm), flipper length (in mm), body mass (in g), sex, and year. This dataset has information from **`r min(pull(penguins, year))`** to **`r max(pull(penguins, year))`**. The different species of penguins in this dataset are **`r levels(pull(penguins, species))`** and the different islands in this dataset are **`r levels(pull(penguins, island))`**.
+* This dataset has **8 variables** defined:
+  * Species
+  * Island
+  * Bill length (in mm)
+  * Bill depth (in mm)
+  * Flipper length (in mm)
+  * Body mass (in g)
+  * Sex
+  * Year
+* The information in this dataset is from **`r min(pull(penguins, year))`** to **`r max(pull(penguins, year))`**. It contains information on these 3 different species of penguins: **`r levels(pull(penguins, species))`** from these 3 different islands: **`r levels(pull(penguins, island))`**.
 * The dataset has **`r nrow(penguins)`** rows and **`r ncol(penguins)`** columns.
-* The mean flipper length is **`r mean(pull(penguins, flipper_length_mm))`**.
+* The mean flipper length is **`r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE))`mm**.
 
-Scatterplot
+#### Scatterplot
 
 ``` {r, scatterplot_penguins, warning = FALSE}
 ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm, color = species)) + geom_point()
-ggsave
+ggsave 
 ```
