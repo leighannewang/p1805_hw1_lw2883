@@ -33,12 +33,21 @@ After trying to take the means of each variable, I find that I am not able to ta
 #### Applying *'as.numeric function'* to logical, character, and factor variables
 
 ```{r, as.numeric, collapse = TRUE, eval = FALSE}
-as.numeric(pull(problem1_df, norm_sample_pos))
+as.numeric(pull(problem1_df, norm_sample_pos)) 
 as.numeric(pull(problem1_df, char_length_10))
 as.numeric(pull(problem1_df, fact_length_10))
 ```
-When we apply the 'as.numeric' function, we are not able to apply it to the character variable, only the logical and factor variables. **explain why**
+When we apply the 'as.numeric' function, we are unable to apply it to the character vector, it only works for the logical and factor vectors. Factors are converted to the level number through the 'as.numeric' function. Previously, we were unable to take the means of the character and factor vectors because the strings for both vectors contained characters, and it is impossible to take the mean for characters. The logical vector assigns '0' or '1' to 'False' or 'True' respectively and was able to take the mean because of the 0 and 1 assignments.
 
+
+#### Logical vector conversion 
+
+```{r, logical_vector, collapse = TRUE, warning = FALSE}
+as.numeric(pull(problem1_df, norm_sample_pos)) * pull(problem1_df, norm_sample)
+as.factor(pull(problem1_df, norm_sample_pos)) * pull(problem1_df, norm_sample)
+as.factor(pull(problem1_df, norm_sample_pos))
+as.numeric(pull(problem1_df, norm_sample_pos)) * pull(problem1_df, norm_sample)
+```
 
 # Problem 2
 
@@ -67,7 +76,7 @@ summary(penguins)
 
 #### Scatterplot
 
-``` {r, scatterplot_penguins, warning = FALSE}
+``` {r, scatterplot_penguins, warning = FALSE, message = FALSE}
 ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm, color = species)) + geom_point()
-ggsave 
+ggsave("penguins.pdf") 
 ```
