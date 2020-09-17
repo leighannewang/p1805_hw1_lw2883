@@ -45,8 +45,8 @@ When we apply the 'as.numeric' function, we are unable to apply it to the charac
 ```{r, logical_vector, collapse = TRUE, warning = FALSE}
 as.numeric(pull(problem1_df, norm_sample_pos)) * pull(problem1_df, norm_sample)
 as.factor(pull(problem1_df, norm_sample_pos)) * pull(problem1_df, norm_sample)
-as.factor(pull(problem1_df, norm_sample_pos))
-as.numeric(pull(problem1_df, norm_sample_pos)) * pull(problem1_df, norm_sample)
+fact_norm_samp_pos = as.factor(pull(problem1_df, norm_sample_pos))
+as.numeric(fact_norm_samp_pos) * pull(problem1_df, norm_sample)
 ```
 
 # Problem 2
